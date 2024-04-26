@@ -4,6 +4,12 @@
 #   source venv/bin/activate
 #   python main.py
 
+#frame_count = {'blink':39, 'happy':60, 'sad':47,'dizzy':67,'excited':24,'neutral':61,'happy2':20,'angry':20,'happy3':26,'bootup3':124,'blink2':20}
+#emotion = ['angry','sad','excited']
+
+#normal = ['neutral','blink2']
+#multiprocessing.Process(target=happy)
+
 import cv2
 import numpy as np
 
@@ -15,7 +21,7 @@ while True:
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOgitR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3,5)
-    
+
     for (x,y,w,h) in faces:
         cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0),5)
         roi_gray = gray[y:y+w, x:x+w]
