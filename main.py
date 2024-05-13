@@ -102,6 +102,8 @@ ret = True
 # read frames
 while ret:
     ret, frame = cap.read()
+    #resize video
+    frame = cv2.resize(frame,(854,480))
 
     #face detection
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
