@@ -5,7 +5,7 @@ import numpy as np
 link_camera1 = "rtsp://admin:BNNNRU@192.168.1.12:554/onvif1"
 cap = cv2.VideoCapture(0)
 
-face_detector = cv2.CascadeClassifier('haarcascade_frontalcatface.xml')
+face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 face_id = input('\n nhap ID: ')
 print("\n [INFO] Camera Start")
