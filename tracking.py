@@ -3,12 +3,12 @@ import cv2
 
 
 # load yolov8 model
-model = YOLO('yolov8n.pt')
+model = YOLO('yolov8m.pt')
 
 # load video
 video_path = 'cctv.mp4'
 link_camera1 = "rtsp://admin:BNNNRU@192.168.1.12:554/onvif1"
-cap = cv2.VideoCapture(video_path)
+cap = cv2.VideoCapture(link_camera1)
 
 ret = True
 # read frames
@@ -16,6 +16,9 @@ while ret:
     ret, frame = cap.read()
 
     if ret:
+        # resize video
+        frame = cv2.resize(frame, (854, 480))
+
         # detect objects
 
         # track objects
