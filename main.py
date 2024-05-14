@@ -102,6 +102,7 @@ ret = True
 # read frames
 while ret:
     ret, frame = cap.read()
+    
     #resize video
     frame = cv2.resize(frame,(854,480))
 
