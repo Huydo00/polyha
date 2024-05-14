@@ -3,7 +3,7 @@ import cv2
 
 
 # load yolov8 model
-model = YOLO('yolov8n.pt')
+model = YOLO('yolov8m.pt')
 
 # load video
 video_path = 'cctv.mp4'
@@ -14,11 +14,11 @@ ret = True
 # read frames
 while ret:
     ret, frame = cap.read()
-    
-    #resize video
-    frame = cv2.resize(frame,(854,480))
 
     if ret:
+        # resize video
+        frame = cv2.resize(frame, (854, 480))
+
         # detect objects
 
         # track objects
