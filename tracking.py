@@ -8,7 +8,7 @@ model = YOLO('yolov8n.pt')
 # load video
 video_path = 'cctv.mp4'
 link_camera1 = "rtsp://admin:BNNNRU@192.168.1.12:554/onvif1"
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(link_camera1)
 
 
 # read frames
