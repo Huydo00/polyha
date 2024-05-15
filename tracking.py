@@ -3,39 +3,32 @@ import cv2
 
 
 # load yolov8 model
-model = YOLO('yolov8m.pt')
+model = YOLO('yolov8n.pt')
 
 # load video
 video_path = 'cctv.mp4'
 link_camera1 = "rtsp://admin:BNNNRU@192.168.1.12:554/onvif1"
-cap = cv2.VideoCapture(link_camera1)
+cap = cv2.VideoCapture(1)
 
-ret = True
+
 # read frames
-while ret:
+while True:
     ret, frame = cap.read()
 
-    if ret:
-        # resize video
-        frame = cv2.resize(frame, (854, 480))
+    # detect objects
 
-        # detect objects
+    # track objects
+    results = model.track(frame, tracker="bytetrack.yaml", classes=0, conf=0.5)
+    DP = results[0].numpy()
 
-        # track objects
-        results = model.track(frame, tracker="bytetrack.yaml", classes=0)
-
+    if len(DP) != 0:
         # plot results
         # cv2.rectangle
 
         # cv2.putText
-        annotated_frame = results[0].plot()
+        frame = results[0].plot()
 
-        # visualize
-        cv2.imshow('YOLOV8', annotated_frame)
-        if cv2.waitKey(25) & 0xFF == ord('q'):
-            break
-
-        #export data
+        # export data
         for result in results:
             boxes = result[0].boxes.numpy()
             for box in boxes:
@@ -43,7 +36,17 @@ while ret:
                 print("xyxy", box.xyxy)
                 print("conf", box.conf)
 
-    else:
+
+    # resize
+    frame = cv2.resize(frame, (854, 480))
+
+    # visualize
+    cv2.imshow('YOLOV8', frame)
+
+
+    k = cv2.waitKey(10) & 0xFF  # "ESC exit"
+    if k == 27:
         break
+
 cap.release()
 cv2.destroyAllWindows()
