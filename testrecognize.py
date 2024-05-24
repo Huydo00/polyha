@@ -19,20 +19,18 @@ id = 0
 names = ['...','huy']
 
 
-link_camera1 = "rtsp://admin:BNNNRU@192.168.1.12:554/onvif1"
-cap = cv2.VideoCapture(1)
+link_camera1 = "rtsp://admin:BNNNRU@192.168.1.13:554/onvif1"
+cap = cv2.VideoCapture("rtsp://admin:BNNNRU@192.168.1.13:554/onvif1")
 
 
 minW = 0.1 * cap.get(3)
 minH = 0.1 * cap.get(4)
 
-
 while True:
     # On camera
     ret, img = cap.read()
+    img = cv2.resize(img, (854, 480))
     img = img
-
-
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 
@@ -59,8 +57,7 @@ while True:
         cv2.putText(img, str(id), (x + 5, y - 5), font, 1, (255, 255, 255), 2)
         cv2.putText(img, str(confidence), (x + 5, y + h - 5), font, 1, (255, 255, 255), 2)
 
-    # resize
-    img = cv2.resize(img (854, 480))
+
 
     cv2.imshow('Check face', img)
 
@@ -69,6 +66,5 @@ while True:
         break
 
 
-print("\n [INFO] Done")
 cap.release()
 cv2.destroyAllWindows()

@@ -3,7 +3,7 @@ import cv2
 
 # load video
 link_camera1 = "rtsp://admin:BNNNRU@192.168.1.13:554/onvif1"
-cap = cv2.VideoCapture(link_camera1)
+cap = cv2.VideoCapture("rtsp://admin:BNNNRU@192.168.1.13:554/onvif1")
 
 # load yolov8 model
 model = YOLO('yolov8n.pt')
