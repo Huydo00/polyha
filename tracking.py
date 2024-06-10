@@ -2,11 +2,12 @@ from ultralytics import YOLO
 import cv2
 
 # load video
-link_camera1 = "rtsp://admin:BNNNRU@192.168.1.13:554/onvif1"
+link_camera1 = "rtsp://admin:BNNNRU@192.168.1.9:554/onvif1"
 cap = cv2.VideoCapture(link_camera1)
 
+
 # load yolov8 model
-model = YOLO('yolov8n.pt')
+model = YOLO('../../yolov8n-pose.pt')
 
 # track objects
 class_name = 0      #Person
@@ -18,9 +19,9 @@ while True:
     if ret:
         # detect objects
         results = model(frame)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # cv2.rectangle
-
         # cv2.putText
         frame = results[0].plot()
 
@@ -49,7 +50,7 @@ while True:
                     print("conf", box.conf)
                     print("\n")
     else:
-        cap = cv2.VideoCapture('rtsp://admin:BNNNRU@192.168.1.12:554/onvif1')
+        cap = cv2.VideoCapture("rtsp://admin:BNNNRU@192.168.1.9:554/onvif1")
 
 cap.release()
 cv2.destroyAllWindows()
